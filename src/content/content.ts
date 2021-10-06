@@ -100,7 +100,7 @@ window.addEventListener('keydown', (e) => {
     }
 
     STATUS.pressSpace = true;
-    style.textContent = '* {cursor: move;!important}';
+    style.textContent = '* {cursor: move !important;}';
   }
 });
 window.addEventListener('keyup', (e) => {
