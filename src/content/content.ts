@@ -136,8 +136,6 @@ window.addEventListener('mousedown', (e) => {
 
     // スクロール対象の検出
     while (target) {
-      console.log(target, target.clientWidth, target.scrollWidth);
-
       if (
         // 子ノードがあり、
         target.firstChild &&
@@ -162,9 +160,6 @@ window.addEventListener('mousedown', (e) => {
 
       target = target.parentElement;
     }
-
-    console.log(STATUS.target);
-
 
     STATUS.target ||= window;
     STATUS.x = e.screenX;
