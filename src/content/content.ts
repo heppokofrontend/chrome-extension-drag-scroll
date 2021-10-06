@@ -136,26 +136,35 @@ window.addEventListener('mousedown', (e) => {
 
     // スクロール対象の検出
     while (target) {
+      console.log(target, target.clientWidth, target.scrollWidth);
+
       if (
+        // 子ノードがあり、
         target.firstChild &&
         (
+          // スクロール可能で、
           (
             target.clientWidth !== target.scrollWidth &&
-            Math.abs(target.clientWidth - target.scrollWidth) < 3
+            3 < Math.abs(target.clientWidth - target.scrollWidth)
           ) ||
           (
             target.clientHeight !== target.scrollHeight &&
-            Math.abs(target.clientHeight - target.scrollHeight) < 3
+            3 < Math.abs(target.clientHeight - target.scrollHeight)
           )
-        )
+        ) &&
+        // oveflow: visibleではないとき
+        'visible' !== getComputedStyle(target as HTMLElement).overflow
       ) {
-        STATUS.target = target.parentElement || window;
+        STATUS.target = target || window;
 
         break;
       }
 
       target = target.parentElement;
     }
+
+    console.log(STATUS.target);
+
 
     STATUS.target ||= window;
     STATUS.x = e.screenX;
