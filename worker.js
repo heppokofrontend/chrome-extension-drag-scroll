@@ -1,0 +1,1 @@
+(()=>{"use strict";const e=e=>{e?chrome.action.setIcon({path:"icon--disabled.png"}):chrome.action.setIcon({path:"icon.png"})};chrome.storage.local.get(["disabled"],(({disabled:a})=>{e(a)})),chrome.runtime.onMessage.addListener((async({data:a})=>{const s=await chrome.tabs.query({});e(a.disabled);for(const e of s)chrome.tabs.sendMessage(e.id,{data:a})}))})();

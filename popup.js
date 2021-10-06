@@ -1,0 +1,1 @@
+(()=>{"use strict";chrome.storage.local.get(["disabled"],(({disabled:e})=>{const s={disabled:!e};chrome.storage.local.set(s),chrome.runtime.sendMessage({data:s}),window.close()}))})();
