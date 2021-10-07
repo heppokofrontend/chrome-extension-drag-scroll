@@ -19,7 +19,8 @@
     "eslint": "^7.30.0",
     "eslint-config-google": "^0.14.0",
     "ts-loader": "^9.2.3",
-    "webpack": "^5.44.0"
+    "webpack": "^5.44.0",
+    "webpack-dev-server": "^4.3.1"
   },
   "license": "MIT",
   "main": "index.js",
@@ -34,6 +35,6 @@
     "prebuild": "cpx \"./static/**\" package -C",
     "predeploy": "yarn build",
     "prestart": "yarn build",
-    "start": "webpack serve"
+    "start": "webpack serve --open --live-reload"
   }
 }

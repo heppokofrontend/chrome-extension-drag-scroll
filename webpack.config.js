@@ -35,17 +35,16 @@ const config = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   devServer: {
-    contentBase: path.join(__dirname, 'package'),
+    static: {
+      directory: './',
+      watch: true,
+    },
     compress: true,
     port: 9000,
   },
 };
 
 module.exports = () => {
-  if (isProduction) {
-    config.mode = 'production';
-  } else {
-    config.mode = 'development';
-  }
+  config.mode = 'production';
   return config;
 };
