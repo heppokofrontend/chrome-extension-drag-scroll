@@ -79,9 +79,9 @@ window.addEventListener('keydown', (e) => {
   if (
     STATUS.disabled ||
     (
+      // activeElementでスペースキーが特別な役割を持つ要素の場合
       e.target === document.activeElement &&
       (
-        // スペースキーが特別な役割を持つ要素の場合
         (document.activeElement as HTMLElement).contentEditable === 'true' ||
         ['input', 'textarea', 'button'].some((name) => {
           return name === document.activeElement?.tagName.toLowerCase();
