@@ -186,6 +186,11 @@ window.addEventListener('mouseup', () => {
 
   window.removeEventListener('mousemove', listener, options);
 });
+window.addEventListener('click', (e) => {
+  if (STATUS.pressSpace) {
+    e.preventDefault();
+  }
+});
 
 
 // -----------------------------------------------------------------------------
