@@ -45,6 +45,8 @@ const options: AddEventListenerOptions = {
   passive: true,
 };
 const style = document.createElement('style');
+/** ドラッグ終了時にクリックイベントやmouseupイベントが既存の要素で発火するのを防ぐための要素 */
+const dragScreen = document.createElement('drag-screen');
 /** 初期化 */
 const init = () => {
   STATUS.pressSpace = false;
@@ -68,6 +70,16 @@ chrome.runtime.onMessage.addListener(({data}) => {
 // 独自スタイルの有効化
 // -----------------------------------------------------------------------------
 window.addEventListener('load', () => {
+  dragScreen.style.cssText = `
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483647;
+  `;
+  // background: rgba(255, 0, 0, .5);
+  style.dataset.from = 'chrome-extenstion';
   document.head.append(style);
 });
 
@@ -173,6 +185,7 @@ window.addEventListener('mousedown', (e) => {
       STATUS.startY = (STATUS.target as HTMLElement).scrollTop;
     }
 
+    document.body.append(dragScreen);
     window.addEventListener('mousemove', listener, options);
   }
 });
@@ -184,12 +197,8 @@ window.addEventListener('mouseup', () => {
     init();
   }
 
+  dragScreen.remove();
   window.removeEventListener('mousemove', listener, options);
-});
-window.addEventListener('click', (e) => {
-  if (STATUS.pressSpace) {
-    e.preventDefault();
-  }
 });
 
 
