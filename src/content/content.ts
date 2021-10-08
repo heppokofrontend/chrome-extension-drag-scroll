@@ -11,6 +11,10 @@ type Status = {
   startX: number,
   /** Y軸方向スクロール開始位置 */
   startY: number,
+  /** X軸方向スクロール可能 */
+  scrollableX: boolean,
+  /** Y軸方向スクロール可能 */
+  scrollableY: boolean,
   /** スペースキーが押されているか */
   pressSpace: boolean,
   /** マウスボタンが押されているか */
@@ -27,14 +31,28 @@ const STATUS: Status = {
   startY: 0,
   pressSpace: false,
   pressMouse: false,
+  scrollableX: false,
+  scrollableY: false,
 };
 /**
  * ドラッグ時のイベントハンドラ
  * @param e - マウスイベント
  */
 const listener = (e: MouseEvent) => {
-  const left = STATUS.startX + STATUS.x - e.screenX;
-  const top = STATUS.startY + STATUS.y - e.screenY;
+  const left = STATUS.startX + (() => {
+    if (!STATUS.scrollableX) {
+      return 0;
+    }
+
+    return STATUS.x - e.screenX;
+  })();
+  const top = STATUS.startY + (() => {
+    if (!STATUS.scrollableY) {
+      return 0;
+    }
+
+    return STATUS.y - e.screenY;
+  })();
 
   STATUS.target?.scroll({
     top,
@@ -144,41 +162,54 @@ window.addEventListener('mousedown', (e) => {
   }
 
   if (STATUS.pressSpace) {
+    const visibleOrHidden = /visible|hidden/;
+    const diff = 3;
     let target = e.target as HTMLElement | null;
 
     e.preventDefault();
 
     STATUS.target = null;
+    STATUS.scrollableX = false;
+    STATUS.scrollableY = false;
     STATUS.pressMouse = true;
 
     // スクロール対象の検出
     while (target) {
-      if (
-        // 子ノードがあり、
-        target.firstChild &&
-        (
-          // スクロール可能で、
-          (
-            target.clientWidth !== target.scrollWidth &&
-            3 < Math.abs(target.clientWidth - target.scrollWidth)
-          ) ||
-          (
-            target.clientHeight !== target.scrollHeight &&
-            3 < Math.abs(target.clientHeight - target.scrollHeight)
-          )
-        ) &&
-        // oveflow: visibleではないとき
-        'visible' !== getComputedStyle(target as HTMLElement).overflow
-      ) {
-        STATUS.target = target || window;
+      const {overflowX, overflowY} = getComputedStyle(target as HTMLElement);
 
-        break;
+      // 子ノードがある場合（空要素などのスクロールの余地がないノードを無視する）
+      if (target.firstChild) {
+        STATUS.scrollableX = (
+          target.clientWidth !== target.scrollWidth &&
+          diff < Math.abs(target.clientWidth - target.scrollWidth) &&
+          !visibleOrHidden.test(overflowX)
+        );
+
+        STATUS.scrollableY =(
+          target.clientHeight !== target.scrollHeight &&
+          diff < Math.abs(target.clientHeight - target.scrollHeight) &&
+          !visibleOrHidden.test(overflowY)
+        );
+
+        if (
+          STATUS.scrollableX ||
+          STATUS.scrollableY
+        ) {
+          STATUS.target = target;
+
+          break;
+        }
       }
 
       target = target.parentElement;
     }
 
-    STATUS.target ||= window;
+    if (!STATUS.target) {
+      STATUS.target = window;
+      STATUS.scrollableX = true;
+      STATUS.scrollableY = true;
+    }
+
     STATUS.x = e.screenX;
     STATUS.y = e.screenY;
 
