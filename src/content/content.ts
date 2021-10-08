@@ -44,14 +44,37 @@ const listener = (e: MouseEvent) => {
 const options: AddEventListenerOptions = {
   passive: true,
 };
-const style = document.createElement('style');
+/** 手のひらツール利用時にカーソルを変化させるためのスタイルを実現するためのstyle要素 */
+const style = (() => {
+  const elm = document.createElement('style');
+
+  elm.dataset.from = 'chrome-extenstion';
+  elm.textContent = '* {cursor: move !important;}';
+
+  return elm;
+})();
 /** ドラッグ終了時にクリックイベントやmouseupイベントが既存の要素で発火するのを防ぐための要素 */
-const dragScreen = document.createElement('drag-screen');
+const dragScreen = (() => {
+  const elm = document.createElement('drag-screen');
+
+  elm.style.cssText = `
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483647;
+  `;
+  // background: rgba(255, 0, 0, .5);
+  elm.dataset.from = 'chrome-extenstion';
+
+  return elm;
+})();
 /** 初期化 */
 const init = () => {
   STATUS.pressSpace = false;
   STATUS.pressMouse = false;
-  style.textContent = '';
+  style.remove();
   window.removeEventListener('mousemove', listener, options);
 };
 
@@ -63,24 +86,6 @@ chrome.storage.local.get(['disabled'], ({disabled}) => {
 });
 chrome.runtime.onMessage.addListener(({data}) => {
   STATUS.disabled = data.disabled;
-});
-
-
-// -----------------------------------------------------------------------------
-// 独自スタイルの有効化
-// -----------------------------------------------------------------------------
-window.addEventListener('load', () => {
-  dragScreen.style.cssText = `
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2147483647;
-  `;
-  // background: rgba(255, 0, 0, .5);
-  style.dataset.from = 'chrome-extenstion';
-  document.head.append(style);
 });
 
 
@@ -112,7 +117,7 @@ window.addEventListener('keydown', (e) => {
     }
 
     STATUS.pressSpace = true;
-    style.textContent = '* {cursor: move !important;}';
+    document.head.append(style);
   }
 });
 window.addEventListener('keyup', (e) => {
