@@ -31,7 +31,7 @@
     "deploy": "gh-pages -d package -b package",
     "eslint": "eslint . --ext .js,.ts --fix",
     "postbuild": "node minify",
-    "prebuild": "cpx \"./static/**\" package -C",
+    "prebuild": "cpx \"./static/**\" package -C && yarn eslint",
     "predeploy": "yarn build",
     "prestart": "yarn build",
     "serve": "webpack serve --open --live-reload"
