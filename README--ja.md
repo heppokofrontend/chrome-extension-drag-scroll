@@ -1,6 +1,6 @@
 # スペースキーとドラッグでスクロールできるようになるやつ
 
-[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE) [![Maintainability](https://api.codeclimate.com/v1/badges/822b5b49ff34e94c063f/maintainability)](https://codeclimate.com/github/heppokofrontend/chrome-extension-drag-scroll/maintainability)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE) [![Maintainability](https://api.codeclimate.com/v1/badges/f8f4d5511be782db7c50/maintainability)](https://codeclimate.com/github/heppokofrontend/chrome-extension-hand-tool/maintainability)
 
 いわゆる手のひらツールです。
 
