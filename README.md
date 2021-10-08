@@ -1,8 +1,8 @@
-# Mouse drag for scroll
+# Hand Tool for browser
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE) [![Maintainability](https://api.codeclimate.com/v1/badges/822b5b49ff34e94c063f/maintainability)](https://codeclimate.com/github/heppokofrontend/chrome-extension-drag-scroll/maintainability)
 
-![](./images/main--en.png)
+It is what we call hand-tool.
 
 [日本語はこちら](./README--ja.md)
 

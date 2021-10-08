@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-drag-scroll",
+  "name": "chrome-extension-hand-tool",
   "description": "This is an extension for Google Chrome that enables you to scroll by holding down the spacebar and dragging the mouse.",
   "version": "1.0.1",
   "dependencies": {
@@ -27,7 +27,6 @@
   "private": true,
   "scripts": {
     "build": "yarn build:prod",
-    "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "deploy": "gh-pages -d package -b package",
     "eslint": "eslint . --ext .js,.ts --fix",
@@ -35,6 +34,6 @@
     "prebuild": "cpx \"./static/**\" package -C",
     "predeploy": "yarn build",
     "prestart": "yarn build",
-    "start": "webpack serve --open --live-reload"
+    "serve": "webpack serve --open --live-reload"
   }
 }
