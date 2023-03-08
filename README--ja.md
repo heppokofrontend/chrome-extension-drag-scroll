@@ -8,11 +8,11 @@
 
 写真加工アプリや、イラスト制作アプリのように、スペースキーを押下中はドラッグでスクロールができるようになります。
 
-PCで横スクロールが必要な時、とくに便利です。
+PC で横スクロールが必要な時、とくに便利です。
 
 ## Download
 
-Google Chromeにインストールしてください。
+Google Chrome にインストールしてください。
 
 [![Available in the Chrome Web Store](./images/iNEddTyWiMfLSwFD6qGq.png)](https://chrome.google.com/webstore/detail/pjoggomlkaanadbegagokiioonfaedle)
 
@@ -21,7 +21,12 @@ Google Chromeにインストールしてください。
 1. スペースキーを押下します
 2. スクロール可能な領域でドラッグします
 
-※ このブラウザ拡張のアイコンをクリックすると、一時的にこの機能を無効化できます
+※ このブラウザ拡張のアイコンをクリックするとアイコンが変わり、必要なキーの種類を切り替えられます。
+
+|               Icon                |         Press Key          |
+| :-------------------------------: | :------------------------: |
+|      ![](./package/icon.png)      |   Only `Space` (default)   |
+| ![](./package/icon--disabled.png) | `Space` + `Shift` + `Ctrl` |
 
 ### サンプル動画
 

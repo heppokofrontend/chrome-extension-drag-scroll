@@ -10,7 +10,6 @@ This browser extension will enable you to scroll by dragging while holding down 
 
 This is especially useful when you need to scroll horizontally on a PC.
 
-
 ## Download
 
 Install it on your Google Chrome from here.
@@ -19,10 +18,15 @@ Install it on your Google Chrome from here.
 
 ## How to use
 
-1. Press the space key
+1. Press the `Space` key
 2. Mouse dragging on scrollable area
 
-\* You can temporarily disable this feature by clicking on the icon of this browser extension.
+\* You can change functional key if you click on the icon of this browser extension.
+
+|               Icon                |         Press Key          |
+| :-------------------------------: | :------------------------: |
+|      ![](./package/icon.png)      |   Only `Space` (default)   |
+| ![](./package/icon--disabled.png) | `Space` + `Shift` + `Ctrl` |
 
 ### Sample video
 

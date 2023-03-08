@@ -2,38 +2,41 @@
   "name": "chrome-extension-hand-tool",
   "description": "This is an extension for Google Chrome that enables you to scroll by holding down the spacebar and dragging the mouse.",
   "version": "1.0.3",
-  "dependencies": {
-    "@types/chrome": "^0.0.147",
-    "cpx": "^1.5.0",
-    "fs-extra": "^10.0.0",
-    "gh-pages": "^3.2.3",
-    "html-minifier": "^4.0.0",
-    "terser": "^5.7.1",
-    "typescript": "^4.3.5",
-    "webpack-cli": "^4.7.2"
+  "author": "heppokofrontend",
+  "bugs": {
+    "url": "https://github.com/heppokofrontend/chrome-extension-hand-tool/issues"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.220",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
-    "@webpack-cli/generators": "^2.2.0",
     "eslint": "^7.30.0",
     "eslint-config-google": "^0.14.0",
+    "gh-pages": "^3.2.3",
+    "http-server": "^14.1.1",
+    "terser": "^5.7.1",
     "ts-loader": "^9.2.3",
-    "webpack": "^5.44.0",
-    "webpack-dev-server": "^4.3.1"
+    "typescript": "^4.3.5",
+    "uglify-js": "^3.17.4"
   },
+  "homepage": "https://github.com/heppokofrontend/chrome-extension-hand-tool#readme",
+  "keywords": [],
   "license": "MIT",
   "main": "index.js",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heppokofrontend/chrome-extension-hand-tool.git"
+  },
   "scripts": {
-    "build": "yarn build:prod",
-    "build:prod": "webpack --mode=production --node-env=production",
+    "build": "tsc --build",
     "deploy": "gh-pages -d package -b package",
+    "dev": "tsc --watch",
     "eslint": "eslint . --ext .js,.ts --fix",
-    "postbuild": "node minify",
-    "prebuild": "cpx \"./static/**\" package -C && yarn eslint",
+    "minify:content": "uglifyjs ./package/content-scripts.js -o ./package/content-scripts.js",
+    "minify:worker": "uglifyjs ./package/worker.js -o ./package/worker.js",
+    "postbuild": "yarn minify:content && yarn minify:worker",
     "predeploy": "yarn build",
-    "prestart": "yarn build",
-    "serve": "webpack serve --open --live-reload"
+    "serve": "http-server ./ -o index.html",
+    "start": "yarn dev"
   }
 }

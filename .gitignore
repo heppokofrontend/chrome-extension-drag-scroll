@@ -1,4 +1,4 @@
 node_modules
-/package
-/.private
-*.log
+package/src/*
+!package/src/.gitkeep
+*.zip
