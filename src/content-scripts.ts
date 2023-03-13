@@ -202,8 +202,12 @@ const run = () => {
     return isEditableElement || isFormControls;
   };
 
+  const isPressedMetaKeyOrCtrlKey = (e: KeyboardEvent) => e.ctrlKey || e.metaKey;
   const keydownHandler = (e: KeyboardEvent) => {
-    if (e.key !== ' ' || (!state.isUseOnlySpace && (!e.ctrlKey || !e.shiftKey))) {
+    if (
+      e.key !== ' ' ||
+      (!state.isUseOnlySpace && (!isPressedMetaKeyOrCtrlKey(e) || !e.shiftKey))
+    ) {
       return;
     }
 

@@ -23,10 +23,10 @@ Google Chrome にインストールしてください。
 
 ※ このブラウザ拡張のアイコンをクリックするとアイコンが変わり、必要なキーの種類を切り替えられます。
 
-|               Icon                |         Press Key          |
-| :-------------------------------: | :------------------------: |
-|      ![](./package/icon.png)      |   Only `Space` (default)   |
-| ![](./package/icon--disabled.png) | `Space` + `Shift` + `Ctrl` |
+|               Icon                |             Press Key             |
+| :-------------------------------: | :-------------------------------: |
+|      ![](./package/icon.png)      |      Only `Space` (default)       |
+| ![](./package/icon--disabled.png) | `Space` + `Shift` + `Ctrl`(`cmd`) |
 
 ### サンプル動画
 
