@@ -23,10 +23,10 @@ Install it on your Google Chrome from here.
 
 \* You can change functional key if you click on the icon of this browser extension.
 
-|               Icon                |             Press Key             |
-| :-------------------------------: | :-------------------------------: |
-|      ![](./package/icon.png)      |      Only `Space` (default)       |
-| ![](./package/icon--disabled.png) | `Space` + `Shift` + `Ctrl`(`cmd`) |
+| Icon                              | Press Key to be draggable         | Press key to scroll                                                   |
+| :-------------------------------- | :-------------------------------- | :-------------------------------------------------------------------- |
+| ![](./package/icon.png)           | Only `Space` (default)            | Down: `Ctrl`(`cmd`) + `Space`<br>Up:`Shift` + `Ctrl`(`cmd`) + `Space` |
+| ![](./package/icon--disabled.png) | `Shift` + `Ctrl`(`cmd`) + `Space` | Down: `Space` <br>`Shift` + `Space`                                   |
 
 ### Sample video
 

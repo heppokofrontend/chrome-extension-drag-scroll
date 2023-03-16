@@ -211,6 +211,17 @@ const run = () => {
       return;
     }
 
+    if (state.isUseOnlySpace && isPressedMetaKeyOrCtrlKey(e)) {
+      e.preventDefault();
+
+      scrollBy({
+        top: window.innerHeight * 0.85 * (e.shiftKey ? -1 : 1),
+        behavior: 'smooth',
+      });
+
+      return;
+    }
+
     if (state.pressSpace) {
       e.preventDefault();
       return;
