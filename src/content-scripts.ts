@@ -43,7 +43,7 @@ const run = () => {
   })();
   /** ドラッグ終了時にクリックイベントやmouseupイベントが既存の要素で発火するのを防ぐための要素 */
   const dragScreen = (() => {
-    const element = document.createElement('drag-screen');
+    const element = document.createElement('heppokofrontend-handtool');
 
     element.style.cssText = `
       position: fixed !important;

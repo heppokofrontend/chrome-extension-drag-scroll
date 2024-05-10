@@ -1,4 +1,4 @@
-"use strict";const state={isUseOnlySpace:false,target:window,x:0,y:0,startX:0,startY:0,scrollableX:false,scrollableY:false,pressSpace:false,pressMouse:false};const run=()=>{const styleElement=(()=>{const element=document.createElement("style");element.textContent="* {cursor: move !important;}";element.dataset.from="chrome-extenstion";return element})();const dragScreen=(()=>{const element=document.createElement("drag-screen");element.style.cssText=`
+"use strict";const state={isUseOnlySpace:false,target:window,x:0,y:0,startX:0,startY:0,scrollableX:false,scrollableY:false,pressSpace:false,pressMouse:false};const run=()=>{const styleElement=(()=>{const element=document.createElement("style");element.textContent="* {cursor: move !important;}";element.dataset.from="chrome-extenstion";return element})();const dragScreen=(()=>{const element=document.createElement("heppokofrontend-handtool");element.style.cssText=`
       position: fixed !important;
       inset: 0 !important;
       z-index: 2147483647 !important;
