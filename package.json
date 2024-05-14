@@ -33,8 +33,8 @@
     "dev": "tsc --watch",
     "eslint": "eslint . --ext .js,.ts --fix",
     "minify:content": "uglifyjs ./package/content-scripts.js -o ./package/content-scripts.js",
-    "minify:worker": "uglifyjs ./package/worker.js -o ./package/worker.js",
-    "postbuild": "yarn minify:content && yarn minify:worker",
+    "minify:popup": "uglifyjs ./package/popup.js -o ./package/popup.js",
+    "postbuild": "yarn minify:content && yarn minify:popup",
     "predeploy": "yarn build",
     "serve": "http-server ./ -o index.html",
     "start": "yarn dev"

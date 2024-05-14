@@ -305,6 +305,7 @@ const run = () => {
   window.addEventListener('keydown', keydownHandler);
   window.addEventListener('keyup', keyupHandler);
   window.addEventListener('blur', resetState);
+  window.addEventListener('contextmenu', resetState);
 };
 
 const isUseOnlySpaceMigration = () => {
