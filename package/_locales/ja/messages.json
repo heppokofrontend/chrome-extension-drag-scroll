@@ -4,5 +4,29 @@
   },
   "extDesc": {
     "message": "このブラウザ拡張は、写真加工アプリや、イラスト制作アプリのように、スペースキーを押下中はマウスドラッグでスクロールができるようになります。"
+  },
+  "checkbox_use_only_space": {
+    "message": "スペースキーだけを利用する"
+  },
+  "desc_space": {
+    "message": "WindowsではCtrl、macOSではcommandキーを押しながらスペースキーを押下するとスクロールを実施します。"
+  },
+  "checkbox_shift": {
+    "message": "Shiftキー"
+  },
+  "desc_shift": {
+    "message": "Shiftキーを押しながらカスタムキーを押すと起動します"
+  },
+  "checkbox_ctrl": {
+    "message": "Ctrl / commandキー"
+  },
+  "desc_ctrl": {
+    "message": "WindowsではCtrl、macOSではcommandキーを押しながらカスタムキーを押すと起動します"
+  },
+  "label_key": {
+    "message": "クリックしてカスタムキーを編集する"
+  },
+  "editing": {
+    "message": "キーを1つ入力してください…"
   }
 }

@@ -1,5 +1,8 @@
 const state: {
   isUseOnlySpace: Boolean;
+  customKeyPattern: string;
+  shiftKey: boolean;
+  ctrlKey: boolean;
   target: EventTarget | null;
   x: number;
   y: number;
@@ -12,6 +15,10 @@ const state: {
 } = {
   /** Spaceキーのみか、またはCtrl+Shift+Spaceか */
   isUseOnlySpace: false,
+  customKeyPattern: '',
+  shiftKey: true,
+  ctrlKey: true,
+
   /** スクロール対象ノード、あるいはwindow */
   target: window,
   /** Y軸方向ドラッグ開始位置 */
@@ -201,25 +208,47 @@ const run = () => {
 
     return isEditableElement || isFormControls;
   };
-
+  const resolvePressedKey = (key: string) => {
+    const pressedKey = key.toLowerCase();
+    return (
+      pressedKey === state.customKeyPattern.toLowerCase() || (state.isUseOnlySpace && key === ' ')
+    );
+  };
   const isPressedMetaKeyOrCtrlKey = (e: KeyboardEvent) => e.ctrlKey || e.metaKey;
   const keydownHandler = (e: KeyboardEvent) => {
-    if (
-      e.key !== ' ' ||
-      (!state.isUseOnlySpace && (!isPressedMetaKeyOrCtrlKey(e) || !e.shiftKey))
-    ) {
+    const isPressedTheKey = resolvePressedKey(e.key);
+
+    if (!isPressedTheKey) {
       return;
     }
 
-    if (state.isUseOnlySpace && isPressedMetaKeyOrCtrlKey(e)) {
-      e.preventDefault();
+    if (state.isUseOnlySpace) {
+      if (isPressedMetaKeyOrCtrlKey(e)) {
+        e.preventDefault();
 
-      scrollBy({
-        top: window.innerHeight * 0.85 * (e.shiftKey ? -1 : 1),
-        behavior: 'smooth',
-      });
+        scrollBy({
+          top: window.innerHeight * 0.85 * (e.shiftKey ? -1 : 1),
+          behavior: 'smooth',
+        });
 
-      return;
+        return;
+      }
+    } else {
+      const isValidCtrl = isPressedMetaKeyOrCtrlKey(e) ? state.ctrlKey : !state.ctrlKey;
+      const isValidShift = e.shiftKey ? state.shiftKey : !state.shiftKey;
+
+      if (!isValidCtrl || !isValidShift) {
+        // console.log('block');
+        // console.log({
+        //   pressedKey,
+        //   customKey: state.customKeyPattern,
+        //   isPressedTheKey,
+        //   isValidCtrl,
+        //   isValidShift,
+        // });
+
+        return;
+      }
     }
 
     if (state.pressSpace) {
@@ -248,7 +277,9 @@ const run = () => {
   };
 
   const keyupHandler = (e: KeyboardEvent) => {
-    if (e.key === ' ') {
+    const isPressedTheKey = resolvePressedKey(e.key);
+
+    if (isPressedTheKey) {
       state.pressSpace = false;
 
       // スペースキーが離されたとき、ドラッグが続いていれば初期化はmouseupに任せる
@@ -276,17 +307,50 @@ const run = () => {
   window.addEventListener('blur', resetState);
 };
 
-window.addEventListener('focus', () => {
+const isUseOnlySpaceMigration = () => {
+  type StorageItem = { isUseOnlySpace?: boolean | undefined };
   chrome.storage.local.get(['isUseOnlySpace'], ({ isUseOnlySpace }: StorageItem) => {
-    state.isUseOnlySpace = Boolean(isUseOnlySpace);
+    const saveData = {
+      isUseOnlySpace: typeof isUseOnlySpace === 'undefined' ? true : isUseOnlySpace,
+      customKeyPattern: ' ',
+      shiftKey: true,
+      ctrlKey: true,
+    } as SaveDataType;
+
+    chrome.storage.local.remove('isUseOnlySpace');
+    chrome.storage.local.set({
+      saveData,
+    });
   });
-});
+};
 
-chrome.runtime.onMessage.addListener(({ isUseOnlySpace }: StorageItem) => {
-  state.isUseOnlySpace = Boolean(isUseOnlySpace);
-});
+chrome.storage.local.get(['saveData'], ({ saveData }) => {
+  if (typeof saveData !== 'object') {
+    isUseOnlySpaceMigration();
+  }
 
-chrome.storage.local.get(['isUseOnlySpace'], ({ isUseOnlySpace }: StorageItem) => {
-  state.isUseOnlySpace = Boolean(isUseOnlySpace);
+  const resolveState = (saveData: SaveDataType | undefined) => {
+    if (typeof saveData === 'undefined') {
+      state.isUseOnlySpace = true; // default
+      return;
+    }
+
+    state.isUseOnlySpace = saveData.isUseOnlySpace ?? true;
+    state.customKeyPattern = saveData.customKeyPattern ?? '';
+    state.ctrlKey = saveData.ctrlKey ?? true;
+    state.shiftKey = saveData.shiftKey ?? true;
+  };
+
+  window.addEventListener('focus', () => {
+    chrome.storage.local.get(['saveData'], ({ saveData }: { saveData?: SaveDataType }) => {
+      resolveState(saveData);
+    });
+  });
+
+  chrome.runtime.onMessage.addListener((saveData: SaveDataType) => {
+    resolveState(saveData);
+  });
+
+  resolveState(saveData);
   run();
 });

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title data-i18n="extName"></title>
+    <link rel="stylesheet" href="./popup.css" />
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <h1 data-i18n="extName"></h1>
+
+      <div class="main">
+        <div class="safety">
+          <div class="options">
+            <p class="state">
+              <label>
+                <span class="img">
+                  <img src="./images/observe.svg" width="16" height="16" alt="" />
+                </span>
+                <input
+                  type="checkbox"
+                  data-option-type="isUseOnlySpace"
+                  aria-describedby="desc-space"
+                />
+                <span class="label" data-i18n="checkbox_use_only_space">loading...</span>
+              </label>
+            </p>
+
+            <p class="hint" id="desc-space">
+              <span aria-label="hint">💡</span>
+              <span data-i18n="desc_space">loading...</span>
+            </p>
+          </div>
+
+          <div class="custom">
+            <div>
+              <p>
+                <span data-i18n="label_key" id="label">loading...</span>
+                <span tabindex="0" id="field" aria-labelledby="label" aria-live="assertive"></span>
+              </p>
+
+              <div class="children">
+                <p>
+                  <label>
+                    <span class="img">
+                      <img src="./images/observe.svg" width="16" height="16" alt="" />
+                    </span>
+                    <input
+                      type="checkbox"
+                      data-option-type="shiftKey"
+                      aria-describedby="desc-shift"
+                    />
+                    <span class="label" data-i18n="checkbox_shift">loading...</span>
+                  </label>
+                </p>
+
+                <p class="hint" id="desc-shift">
+                  <span aria-label="hint">💡</span>
+                  <span data-i18n="desc_shift">loading...</span>
+                </p>
+
+                <p>
+                  <label>
+                    <span class="img">
+                      <img src="./images/observe.svg" width="16" height="16" alt="" />
+                    </span>
+                    <input
+                      type="checkbox"
+                      data-option-type="ctrlKey"
+                      aria-describedby="desc-ctrl"
+                    />
+                    <span class="label" data-i18n="checkbox_ctrl">loading...</span>
+                  </label>
+                </p>
+
+                <p class="hint" id="desc-ctrl">
+                  <span aria-label="hint">💡</span>
+                  <span data-i18n="desc_ctrl">loading...</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

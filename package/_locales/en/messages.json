@@ -4,5 +4,29 @@
   },
   "extDesc": {
     "message": "Will enable you to scroll by dragging while holding down the space key, just like photo processing or illustration creation apps."
+  },
+  "checkbox_use_only_space": {
+    "message": "Use the space key only"
+  },
+  "desc_space": {
+    "message": "Pressing Ctrl (Windows) or Command (macOS) and the space key together will scroll."
+  },
+  "checkbox_shift": {
+    "message": "Shift key"
+  },
+  "desc_shift": {
+    "message": "Start by pressing the custom key while holding down Shift."
+  },
+  "checkbox_ctrl": {
+    "message": "Ctrl / Command key"
+  },
+  "desc_ctrl": {
+    "message": "Start by pressing the custom key while holding down Ctrl (Windows) or Command (macOS)."
+  },
+  "label_key": {
+    "message": "Click to edit the custom key"
+  },
+  "editing": {
+    "message": "Please enter a key…"
   }
 }
