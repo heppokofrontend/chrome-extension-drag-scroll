@@ -13,7 +13,7 @@
       "js": ["content-scripts.js"]
     }
   ],
-  "permissions": ["tabs", "storage"],
+  "permissions": ["storage"],
   "icons": {
     "128": "icon.png"
   },
